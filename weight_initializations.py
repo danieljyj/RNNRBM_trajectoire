@@ -10,8 +10,8 @@ import ngsim_manipulation
     training them directly on the data with CD-k. We initialize the parameters of the RNN with small weights.
 """
 
-num_epochs = 100 #The number of epochs to train the RBM
-lr = 0.01 #The learning rate for the RBM
+num_epochs = 10 #The number of epochs to train the RBM
+lr = 0.0000001 #The learning rate for the RBM
 
 def main():
     print("reading data...")

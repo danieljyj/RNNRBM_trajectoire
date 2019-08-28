@@ -6,13 +6,14 @@ import rnn_rbm
 import ngsim_manipulation
 import draw
 import numpy as np
+import RBM
 
 """
     This file contains the code for running a tensorflow session to reconstruct trajectories
 """
 
-# 三条比较有代表性的traj 分别是    get_traj(1)     get_traj(7)   get_traj(9) 其中第九条偏差最多
-
+# 三条比较有代表性的traj 分别是    get_traj(0)     get_traj(3)   get_traj(4) 其中4偏差最多
+rbm_timesteps=ngsim_manipulation.rbm_timesteps
 num_sample=1
 
 def main(saved_weights_path):
@@ -26,12 +27,20 @@ def main(saved_weights_path):
     saver = tf.train.Saver(params) #We use this saver object to restore the weights of the model
     
     #trajectories_primer = data.get_trajectories(start=0, end=5)
-    #trajectories_primer = data.get_trajs([0,3,4])
-    trajectories_primer = [data.get_traj(1)]
+    #idx=[0,3,4]
+    #trajectories_primer = data.get_trajs(idx)
+    #trajectories_primer = data.add_noise_gaussian(trajectories_primer)
+    #trajectories_primer = data.add_noise_zero(idx)
+
+    idx=0
+    trajectories_primer = [data.get_traj(idx)]
+    #trajectories_primer = data.add_noise_gaussian(trajectories_primer)
+    #trajectories_primer = data.add_noise_zero([idx])
+
+    #xytraj=data.xyset[1]
+    #xytraj = xytraj*[data.max[0],1]
     
-    # add noise to trajectories
-    trajectories_primer = add_noise(trajectories_primer, data.max)
-    
+    #x_sample=RBM.gibbs_sample(x, W, bv, bh, 1)
     reconstructed_trajectories=[]
     decontr_trajectories_primer=[]
     print("reconstruction...")
@@ -39,6 +48,15 @@ def main(saved_weights_path):
         init = tf.global_variables_initializer()
         sess.run(init)
         saver.restore(sess, saved_weights_path) #load the saved weights of the network
+        '''
+        # without time dependence, reconstruction based on RBM(only one RBM for all time steps) 
+        # actually, this performs not too badly, even just one RBM for different time(because we choose rbm_steps=100m it include time dependence already) 
+        for j in tqdm( range(len(trajectories_primer)) ):
+            decontract_traj = data.decontraction( sess.run(x_sample, feed_dict={x: trajectories_primer[j]})  )
+            reconstructed_trajectories.append( decontract_traj ) 
+            decontr_trajectories_primer.append(  data.decontraction(trajectories_primer[j])    )
+        '''
+        # reconstruction based on RNN-RBM, 
         for j in tqdm( range(len(trajectories_primer)) ):
             # 如果是disData, 用下面这行
             # reconstructed_trajectories.append( sess.run(reconstruction(), feed_dict={x: trajectories_primer[j]}) )
@@ -46,17 +64,10 @@ def main(saved_weights_path):
                 decontract_traj = data.decontraction(   sess.run(reconstruction(), feed_dict={x: trajectories_primer[j]})   )
                 reconstructed_trajectories.append( decontract_traj ) #Prime the network with primer and reconstruct this trajectory
             decontr_trajectories_primer.append(  data.decontraction(trajectories_primer[j])    )
-
-        trajectories = decontr_trajectories_primer + reconstructed_trajectories
-
+        
+        trajectories = decontr_trajectories_primer + reconstructed_trajectories #+ [xytraj]
         draw.draw_trajectories(trajectories, num_trajs = len(trajectories_primer)  )
-def add_noise(trajectories, max):
-    for i in range(len(trajectories)):
-        print(type(trajectories))
-        print(type(trajectories[i][10:20]))
-        print(trajectories[i][10:20])
-        trajectories[i][10:20] = trajectories[i][10:20]+[10,0]/max
-    return trajectories
+
 
 
 

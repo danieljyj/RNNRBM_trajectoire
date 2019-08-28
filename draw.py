@@ -1,21 +1,43 @@
+'''
+This is the version that draw x and velocity
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 import ngsim_manipulation
 import os
 
-
-def draw_trajectories(trajectories, num_trajs):
+rbm_timesteps = ngsim_manipulation.rbm_timesteps
+deg_superpose = ngsim_manipulation.deg_superpose
+def draw_trajectories(inpt_trajectories, num_trajs):
+    trajectories=[]
+    for traj in inpt_trajectories[:]:
+        j=0
+        traj_sequence=[]
+        for unit in traj:
+            traj_sequence.append( np.reshape(unit[: (int)(len(unit)/rbm_timesteps*deg_superpose) ], [deg_superpose, -1])    )
+        traj = np.reshape(np.array(traj_sequence),[-1, (int)(len(unit)/rbm_timesteps)])
+        trajectories.append(traj)
+#    trajectories=trajectories+ inpt_trajectories[-num_trajs:]
     if not os.path.isdir("./picture_folder"):
         os.makedirs("./picture_folder")
     plt.figure(figsize=(30,15))
     idx=0
     for traj in trajectories[: num_trajs]:
-        plt.plot(traj[:,0], traj[:,1],'r',label='original.{}'.format(idx))
+        plt.plot(traj[:,0], 0.1*np.cumsum(traj[:,1]),'r',label='original.{}'.format(idx))
         idx+=1
     idx=0
     for traj in trajectories[num_trajs:]:
-        plt.plot(traj[:,0], traj[:,1], label='reconstructed.{}'.format(idx))
+        plt.plot(traj[:,0], 0.1*np.cumsum(traj[:,1]), label='reconstructed.{}'.format(idx))
         idx+=1
+    '''
+    idx=0
+    for traj in trajectories[(-num_trajs): ]:
+        print("type,", type(traj))
+        print("shape,", traj.shape)
+        plt.plot(traj[:,0], traj[:,1], label='xy.{}'.format(idx))
+        idx+=1
+    '''
+    
     plt.xlabel("x")
     plt.ylabel("y")
     plt.title("trajectories")
@@ -27,6 +49,7 @@ def draw_trajectories(trajectories, num_trajs):
 
     
 def draw_traj(traj):
+    traj = np.reshape(traj, [(int)(len(traj)*rbm_timesteps), -1])
     if not os.path.isdir("./picture_folder"):
         os.makedirs("./picture_folder")
     plt.figure(figsize=(30,15))

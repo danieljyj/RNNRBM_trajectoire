@@ -11,8 +11,9 @@ import ngsim_manipulation
     This file contains the code for training the RNN-RBM by using the data in the Pop_Music_Midi directory
 """
 
-learningRate = 0.01
+learningRate = 0.000001
 saved_initial_weights_path = "parameter_checkpoints/initialized.ckpt" #The path to the initialized weights checkpoint file
+#saved_initial_weights_path = "parameters/epoch_5.ckpt" #The path to the initialized weights checkpoint file
 
 def main(num_epochs):
     print("reading data...")
