@@ -1,3 +1,6 @@
+'''
+This is the version that draw x and y
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 import ngsim_manipulation
@@ -6,6 +9,7 @@ import os
 rbm_timesteps = ngsim_manipulation.rbm_timesteps
 deg_superpose = ngsim_manipulation.deg_superpose
 def draw_trajectories(inpt_trajectories, num_trajs):
+# take as input a list of trajectories, draw them
     trajectories=[]
     for traj in inpt_trajectories:
         j=0
@@ -15,7 +19,6 @@ def draw_trajectories(inpt_trajectories, num_trajs):
         traj = np.reshape(np.array(traj_sequence),[-1, (int)(len(unit)/rbm_timesteps)])
         trajectories.append(traj)
 
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!shape of one trajectoire is : ", trajectories[0].shape)
     if not os.path.isdir("./picture_folder"):
         os.makedirs("./picture_folder")
     plt.figure(figsize=(30,15))

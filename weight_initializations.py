@@ -10,8 +10,8 @@ import ngsim_manipulation
     training them directly on the data with CD-k. We initialize the parameters of the RNN with small weights.
 """
 
-num_epochs = 10 #The number of epochs to train the RBM
-lr = 0.0000001 #The learning rate for the RBM
+num_epochs = 100 #The number of epochs to train the RBM
+lr = 0.1 #The learning rate for the RBM
 
 def main():
     print("reading data...")
@@ -49,7 +49,7 @@ def main():
             #for idx in range(100):
             for idx in range(data.num_trajectories):
                 sess.run(updt, feed_dict={x: data.next_traj()}) # even if traj is comprised of data in different time, we treat it like a batch of data in the same time, because we can only initialize one RBM.
-              
+        
         #Save the initialized model here
         save_path = saver.save(sess, "parameter_checkpoints/initialized.ckpt")
 

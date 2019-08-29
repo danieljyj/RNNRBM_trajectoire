@@ -9,6 +9,7 @@ import os
 rbm_timesteps = ngsim_manipulation.rbm_timesteps
 deg_superpose = ngsim_manipulation.deg_superpose
 def draw_trajectories(inpt_trajectories, num_trajs):
+# take as input a list of trajectories, draw them
     trajectories=[]
     for traj in inpt_trajectories[:]:
         j=0
