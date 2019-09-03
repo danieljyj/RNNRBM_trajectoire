@@ -11,7 +11,7 @@ import ngsim_manipulation
 """
 
 num_epochs = 100 #The number of epochs to train the RBM
-lr = 0.1 #The learning rate for the RBM
+lr = 0.01 #The learning rate for the RBM
 
 def main():
     print("reading data...")

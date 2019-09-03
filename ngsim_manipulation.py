@@ -1,6 +1,6 @@
 '''
 This is the version that take velocity as input instead of y.
-contraction to [0,1]
+contraction dataset to [0,1]
 for using it, make sure that the name of file is ngsim_manipulation.py
 '''
 import numpy as np

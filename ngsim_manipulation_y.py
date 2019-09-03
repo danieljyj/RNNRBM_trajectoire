@@ -1,21 +1,13 @@
+'''
+This is the version that take y as input instead of velocity.
+contraction dataset to [0,1]
+for using it, make sure that the name of file is ngsim_manipulation.py
+'''
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import os
-# UAarr到底应不应该算进u0  ***算进
-# 检查高斯RBM的sigma是否正确地在应该乘除的地方添加过   ***貌似没有错误
-# 高斯RBM， 尝试在重构的时候特地的把不采样，而是直接取平均值
-# 采用01RBM的模型但是期望的方式 来模拟valeur reel
-# 训练五个时间步长为一单位的模型
-# 一个时间序列 400多步有可能太长了，试试抽样后的trajet
-#  试试对轨道进行onehot之后的离散训练。 *** 完美重构
-# 试试另一种正则化方法, 不求方差，只是简单的把数据压缩到01之间 然后用普通的rbm
 
-# 改变 rnnrbm 的隐藏层的节点数  以及增加更多的可见层元素
-# 目前来看，该模型只是简单的学会了产生与输入一模一样的输出，并没有 学会feature
-# 添加噪声 进行监督学习
-# 把y坐标换成速度试一下
-# 用relu试一下
 rbm_timesteps      = 10   # timesteps in every RBM visible layer
 deg_superpose=5   # degree of superposition. if deg_superpose == rbm_timesteps, it means no superposition
 class Data(object):
