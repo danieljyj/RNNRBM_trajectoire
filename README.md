@@ -11,4 +11,4 @@ First, you need to put the "trajectories-0750am-0805am.csv"  in the directory ./
 
 5. The output picture is stocked in picture_folder.
 
-There are version of ngsim_manipulation, rnn_rbm, RBM, draw, they treat different situations. For using them, rename them(delete the version notation).
+There are different versions of ngsim_manipulation, rnn_rbm, RBM, draw, they treat different situations. For using them, rename them(delete the version notation).
