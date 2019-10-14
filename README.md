@@ -5,15 +5,23 @@ This is an adapted variaiton of [RNN-RBM](https://arxiv.org/ftp/arxiv/papers/120
 
 Unlike the original RNN-RBM, this is a model which performs well for real-valued dataset. After training, it can memorize a given vehicle trajectories pattern on a specific route, which can be used to reconstruct vehicle trajectories based on a input dataset polluted by noise.
 
-First, you need to put the "trajectories-0750am-0805am.csv"  in the directory ./ngsim_data/
+Training
+----
+Put the input trajectories dataset (eg. "trajectories-0750am-0805am.csv" of US Highway 101)  in the directory "./ngsim_data/ "
+
 1. `python ngsim_manipulation.py`  # pretreatement of dataset
 
-2. `python weight_initialization.py`  # initialization of W of RBM
+2. `python weight_initialization.py`  # pre-training of RBM Neural networks
 
 3. `python rnn_rbm_train.py  <num_epoch>` # training,  num_epoch can be about 10
 
-4. `python rnn_rbm_reconstruction.py ./parameter_checkpoints/<fichier .ckpt>`  # reconstruction
+4. `python rnn_rbm_reconstruction.py ./parameter_checkpoints/<fichier .ckpt>`  # reconstruction of trajectories
 
-5. The output picture is stocked in picture_folder.
+The output picture is stocked in "./picture_folder".
 
-There are different versions of ngsim_manipulation, rnn_rbm, RBM, draw, they treat different situations. For using them, rename them(delete the version notation).
+There are different versions of ngsim_manipulation, as well as for rnn_rbm, RBM, draw, they deal with different situations. For using them, rename them(delete the version notation).
+
+----
+One demonstration of noise reduction:
+![](picture_folder/result.png)
+The red lines are noised trajectories, and the blue lines are reconstructed trajectories by RNN-RBM.
