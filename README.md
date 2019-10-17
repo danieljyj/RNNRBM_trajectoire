@@ -2,6 +2,7 @@
 by [Yingjie Jiang](https://www.yingjiejiang.com)
 
 This is an adapted variaiton of [RNN-RBM](https://arxiv.org/ftp/arxiv/papers/1206/1206.6392.pdf) for unsupervised vehicle trajectory pattern learning on a multi-lanes highway. The dataset used is [US Highway 101](https://www.fhwa.dot.gov/publications/research/operations/07030/).
+
 ![101](./picture_folder/highway101.jpg)
 <center>fig1. trajectory dataset captured by camera set inus highway 101 <center>
 
