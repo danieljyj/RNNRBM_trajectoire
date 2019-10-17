@@ -2,6 +2,9 @@
 by [Yingjie Jiang](https://www.yingjiejiang.com)
 
 This is an adapted variaiton of [RNN-RBM](https://arxiv.org/ftp/arxiv/papers/1206/1206.6392.pdf) for unsupervised vehicle trajectory pattern learning on a multi-lanes highway. The dataset used is [US Highway 101](https://www.fhwa.dot.gov/publications/research/operations/07030/).
+![101](./picture_folder/highway101.jpg)
+<center>fig1. trajectory dataset captured by camera set inus highway 101 <center>
+
 
 Unlike the original RNN-RBM, this is a model which performs well for real-valued dataset. After training, it can memorize a given vehicle trajectories pattern on a specific route, which can be used to reconstruct vehicle trajectories based on a input dataset polluted by noise.
 
@@ -24,4 +27,5 @@ There are different versions of ngsim_manipulation, as well as for rnn_rbm, RBM,
 ----
 One demonstration of noise reduction:
 ![](picture_folder/result.png)
-The red lines are noised trajectories, and the lines with other colors are reconstructed trajectories by RNN-RBM.
+<center> fig2. The red lines are noised trajectories, and the lines with other colors are reconstructed trajectories by RNN-RBM.
+<center>
