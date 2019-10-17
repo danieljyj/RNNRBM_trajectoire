@@ -6,6 +6,7 @@ This is an adapted variaiton of [RNN-RBM](https://arxiv.org/ftp/arxiv/papers/120
 ![101](./picture_folder/highway101.jpg)
 <center>fig1. trajectory dataset captured by camera set inus highway 101 <center>
 
+---
 
 Unlike the original RNN-RBM, this is a model which performs well for real-valued dataset. After training, it can memorize a given vehicle trajectories pattern on a specific route, which can be used to reconstruct vehicle trajectories based on a input dataset polluted by noise.
 
