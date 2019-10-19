@@ -37,3 +37,6 @@ One demonstration of noise reduction:
 ![](picture_folder/result.png)
 <center> fig3. The red lines are noised trajectories, and the lines with other colors are reconstructed trajectories by RNN-RBM.
 <center>
+
+----
+Further work can be conducted, for example, changing the standard RNN by LSTM, or changing RBM by DBN, etc.
